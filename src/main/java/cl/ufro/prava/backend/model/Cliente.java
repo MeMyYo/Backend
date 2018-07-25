@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -90,6 +91,10 @@ public class Cliente implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "biblioteca_id")
     )
     private List<Biblioteca> bibliotecas;
+    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
     
     public Cliente(){
         
@@ -255,5 +260,12 @@ public class Cliente implements Serializable {
         this.bibliotecas = bibliotecas;
     }
 
-    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
 }
